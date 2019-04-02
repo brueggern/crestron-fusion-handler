@@ -1,16 +1,15 @@
 <?php
-namespace Tests;
+namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\BasicTest;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClientException;
 
-class BasicTest extends TestCase
+class ClientTest extends BasicTest
 {
     public function testConnectionExcpetion()
     {
         $client = new CrestronFusionClient('foo', 'bar');
-        
         $this->expectException(CrestronFusionClientException::class);
         $client->getRequest('https://foobar.ch', []);
     }

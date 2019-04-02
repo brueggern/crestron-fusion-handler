@@ -6,8 +6,8 @@
         "test" : [
             "vendor/bin/phpunit"
         ],
-        "lint": "php-linter src",
-        "lint:fix": "php-linter --fix src"
+        "lint": "php-linter src tests",
+        "lint:fix": "php-linter --fix src tests"
     },
     "repositories": [
         {
@@ -21,7 +21,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
-        "brueggern/php-linter": "dev-master"
+        "brueggern/php-linter": "dev-master",
+        "vlucas/phpdotenv": "^3.3"
     },
     "authors": [
         {
