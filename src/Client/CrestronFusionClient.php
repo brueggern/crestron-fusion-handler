@@ -53,7 +53,7 @@ class CrestronFusionClient extends Client
             return json_decode($response->getBody(), true);
         }
         catch (ConnectException $e) {
-            throw new CrestronFusionClientException();
+            throw new CrestronFusionClientException($e->getMessage());
         }
     }
 }
