@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\BasicTest;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
-use Brueggern\CrestronFusionHandler\Client\CrestronFusionClientException;
+use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionClientException;
 
 class ClientTest extends BasicTest
 {
