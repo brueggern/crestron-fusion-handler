@@ -16,11 +16,11 @@ class Collection
     /**
      * Add an object to the collection
      *
-     * @param any $obj
+     * @param mixed $obj
      * @param string $key
      * @return void
      */
-    public function addItem(any $obj, string $key = null)
+    public function addItem(mixed $obj, string $key = null)
     {
         if ($key === null) {
             $this->items[] = $obj;
@@ -55,9 +55,9 @@ class Collection
      * Get an item from the collection
      *
      * @param string $key
-     * @return any
+     * @return mixed
      */
-    public function getItem(string $key) : any
+    public function getItem(string $key) : mixed
     {
         if (isset($this->items[$key])) {
             return $this->items[$key];
