@@ -4,7 +4,7 @@ namespace Brueggern\CrestronFusionHandler\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
-use Brueggern\CrestronFusionHandler\Client\CrestronFusionClientException;
+use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionClientException;
 
 class CrestronFusionClient extends Client
 {

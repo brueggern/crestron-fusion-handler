@@ -4,5 +4,5 @@ namespace Brueggern\CrestronFusionHandler;
 
 class CrestronFusionHandler
 {
-    
+
 }
