@@ -4,7 +4,7 @@ namespace Brueggern\CrestronFusionHandler;
 
 use Brueggern\CrestronFusionHandler\Exceptions\CollectionException;
 
-class Collection 
+class Collection
 {
     /**
      * Array of objects
@@ -29,9 +29,7 @@ class Collection
             if (isset($this->items[$key])) {
                 throw new CollectionException('Key '.$key.' already in use.');
             }
-            else {
-                $this->items[$key] = $obj;
-            }
+            $this->items[$key] = $obj;
         }
     }
 
@@ -62,9 +60,8 @@ class Collection
         if (isset($this->items[$key])) {
             return $this->items[$key];
         }
-        else {
-            throw new CollectionException('Invalid key '.$key.'.');
-        }
+
+        throw new CollectionException('Invalid key '.$key.'.');
     }
 
     /**
@@ -80,7 +77,7 @@ class Collection
     /**
      * Get length of collection
      *
-     * @return integer
+     * @return int
      */
     public function length() : int
     {
@@ -91,7 +88,7 @@ class Collection
      * Determine if key exists
      *
      * @param string $key
-     * @return boolean
+     * @return bool
      */
     public function keyExists(string $key) : bool
     {

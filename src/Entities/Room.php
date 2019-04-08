@@ -5,7 +5,7 @@ namespace Brueggern\CrestronFusionHandler\Entities;
 use DateTime;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
-class Room 
+class Room
 {
     /**
      * uuid
@@ -22,18 +22,18 @@ class Room
     public $name = null;
 
     /**
-     * Last modified time
-     *
-     * @var DateTime
-     */
-    public $lastModifiedAt = null;
-
-    /**
      * Description text
      *
      * @var string
      */
     public $description = null;
+
+    /**
+     * Last modified time
+     *
+     * @var DateTime
+     */
+    private $lastModifiedAt = null;
 
     /**
      * Create a new room entity
@@ -42,10 +42,27 @@ class Room
      */
     public function __construct(array $data)
     {
+        if (isset($data['lastModifiedAt']) && !$data['lastModifiedAt'] instanceof DateTime) {
+            throw new CrestronFusionException('Invalid type for lastModifiedAt');
+        }
+
         $this->id = $data['id'] ?? null;
         $this->name = $data['name'] ?? null;
-        $this->lastModifiedAt = isset($data['lastModifiedAt']) ? new DateTime($data['lastModifiedAt']) : null;
         $this->description = $data['description'] ?? null;
+        $this->lastModifiedAt = $data['lastModifiedAt'] ?? null;
+    }
+
+    /**
+     * Get a property value
+     *
+     * @param string $name
+     * @return void
+     */
+    public function __get(string $name)
+    {
+        if ($name === 'lastModifiedAt') {
+            return $this->lastModifiedAt;
+        }
     }
 
     /**
@@ -54,22 +71,15 @@ class Room
      * @param string $name
      * @param any $value
      */
-    public function __set(string $name, any $value)
+    public function __set(string $name, $value)
     {
-        switch ($name) {
-
-            case 'lastModifiedAt':
-                if ($value instanceof DateTime) {
-                    $this->${$name} = $value;
-                }
-                else {
-                    throw new CrestronFusionException('Invalid type for lastModifiedAt');
-                }
-                break;
-
-            default:
-                $this->${$name} = $value;
-                break;
+        if ($name === 'lastModifiedAt') {
+            if ($value instanceof DateTime) {
+                $this->lastModifiedAt = $value;
+            }
+            else {
+                throw new CrestronFusionException('Invalid type for lastModifiedAt');
+            }
         }
     }
 }

@@ -3,7 +3,6 @@
 namespace Brueggern\CrestronFusionHandler;
 
 use DateTime;
-use Brueggern\CrestronFusionHandler\Collection;
 use Brueggern\CrestronFusionHandler\Entities\Room;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
@@ -35,10 +34,8 @@ class CrestronFusionHandler
     public function getRooms() : Collection
     {
         try {
-            
         }
         catch (CrestronFusionException $e) {
-
         }
     }
 
@@ -51,15 +48,13 @@ class CrestronFusionHandler
     public function getAppointments(DateTime $dateTime) : Collection
     {
         try {
-            
         }
         catch (CrestronFusionException $e) {
-
         }
     }
 
     /**
-     * Get all appointments of a specific room and day 
+     * Get all appointments of a specific room and day
      *
      * @param Room $room
      * @param DateTime $dateTime
@@ -68,10 +63,8 @@ class CrestronFusionHandler
     public function getAppointmentsByRoom(Room $room, DateTime $dateTime) : Collection
     {
         try {
-            
         }
         catch (CrestronFusionException $e) {
-
         }
     }
 }
