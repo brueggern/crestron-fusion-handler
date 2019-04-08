@@ -15,15 +15,14 @@ class CrestronFusionClient extends Client
     protected $authUser;
 
     /**
-     * An auth token and an auth user must be set
+     * Set auth params
      *
      * @param string $authToken
      * @param string $authUser
+     * @return void
      */
-    public function __construct(string $authToken, string $authUser)
+    public function setAuth(string $authToken, string $authUser)
     {
-        parent::__construct();
-
         $this->authToken = $authToken;
         $this->authUser = $authUser;
     }
@@ -37,13 +36,16 @@ class CrestronFusionClient extends Client
      */
     public function getRequest(string $url, array $params) : array
     {
-        $auth = [
-            'auth' => $this->authToken.' '.$this->authUser,
-        ];
+        if ($this->authToken && $this->authUser) {
+            $auth = [
+                'auth' => $this->authToken.' '.$this->authUser,
+            ];
+            $params = array_merge($auth, $params);
+        }
 
         try {
             $response = $this->request('GET', $url, [
-                'query' => array_merge($auth, $params),
+                'query' => $params,
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ],
