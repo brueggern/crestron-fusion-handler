@@ -69,7 +69,7 @@ class Room
      * Set a property value
      *
      * @param string $name
-     * @param any $value
+     * @param mixed $value
      */
     public function __set(string $name, $value)
     {
