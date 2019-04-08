@@ -17,10 +17,10 @@ class Collection
      * Add an object to the collection
      *
      * @param mixed $obj
-     * @param string $key
+     * @param mixed $key
      * @return void
      */
-    public function addItem(mixed $obj, string $key = null)
+    public function addItem($obj, $key = null)
     {
         if ($key === null) {
             $this->items[] = $obj;
@@ -34,34 +34,60 @@ class Collection
     }
 
     /**
-     * Delete an item from the collection
+     * Get an item from the collection
      *
-     * @param string $key
-     * @return void
+     * @param mixed $key
+     * @return mixed
      */
-    public function deleteItem(string $key)
+    public function getItem($key)
     {
-        if (isset($this->items[$key])) {
-            unset($this->items[$key]);
-        }
-        else {
+        if (is_string($key)) {
+            if (isset($this->items[$key])) {
+                return $this->items[$key];
+            }
             throw new CollectionException('Invalid key '.$key.'.');
         }
+
+        if (is_integer($key)) {
+            $values = array_values($this->items);
+            if (isset($values[$key])) {
+                return $values[$key];
+            }
+            throw new CollectionException('Invalid key '.$key.'.');
+        }
+
+        throw new CollectionException('Invalid key type (only string or numeric key is allowed).');
     }
 
     /**
-     * Get an item from the collection
+     * Delete an item from the collection
      *
-     * @param string $key
-     * @return mixed
+     * @param mixed $key
+     * @return bool
      */
-    public function getItem(string $key) : mixed
+    public function deleteItem($key) : bool
     {
-        if (isset($this->items[$key])) {
-            return $this->items[$key];
+        if (is_string($key)) {
+            if (isset($this->items[$key])) {
+                unset($this->items[$key]);
+                return true;
+            }
+
+            throw new CollectionException('Invalid key '.$key.'.');
         }
 
-        throw new CollectionException('Invalid key '.$key.'.');
+        if (is_integer($key)) {
+            $keys = array_keys($this->items);
+            $key = $keys[$key];
+            if (isset($this->items[$key])) {
+                unset($this->items[$key]);
+                return true;
+            }
+
+            throw new CollectionException('Invalid key '.$key.'.');
+        }
+
+        throw new CollectionException('Invalid key type (only string or numeric key is allowed).');
     }
 
     /**
@@ -72,6 +98,16 @@ class Collection
     public function keys() : array
     {
         return array_keys($this->items);
+    }
+
+    /**
+     * Return values only
+     *
+     * @return array
+     */
+    public function values() : array
+    {
+        return array_values($this->items);
     }
 
     /**
@@ -93,5 +129,15 @@ class Collection
     public function keyExists(string $key) : bool
     {
         return isset($this->items[$key]);
+    }
+
+    /**
+     * Returns the item array
+     *
+     * @return array
+     */
+    public function get() : array
+    {
+        return $this->items;
     }
 }
