@@ -8,11 +8,26 @@ use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionClientException;
 
 class CrestronFusionClient extends Client
 {
+    /** @var string baseUrl */
+    protected $baseUrl;
+
     /** @var string auth token */
     protected $authToken;
 
     /** @var string auth user */
     protected $authUser;
+
+    /**
+     * Creat new Client
+     *
+     * @param string $baseUrl
+     */
+    public function __construct(string $baseUrl)
+    {
+        parent::__construct();
+
+        $this->baseUrl = $baseUrl;
+    }
 
     /**
      * Set auth params
@@ -44,7 +59,7 @@ class CrestronFusionClient extends Client
         }
 
         try {
-            $response = $this->request('GET', $url, [
+            $response = $this->request('GET', $this->baseUrl.'/'.$url, [
                 'query' => $params,
                 'headers' => [
                     'Content-Type' => 'application/json',

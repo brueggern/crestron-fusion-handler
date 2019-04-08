@@ -10,8 +10,8 @@ class ClientTest extends BasicTest
 {
     public function testConnectionExcpetion()
     {
-        $client = new CrestronFusionClient();
+        $client = new CrestronFusionClient('https://foobar.ch');
         $this->expectException(CrestronFusionClientException::class);
-        $client->getRequest('https://foobar.ch', []);
+        $client->getRequest('', []);
     }
 }
