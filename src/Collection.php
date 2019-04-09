@@ -11,7 +11,17 @@ class Collection
      *
      * @var array
      */
-    protected $items = [];
+    protected $items;
+
+    /**
+     * Instantiate a new collection
+     *
+     * @param array $items
+     */
+    public function __construct(array $items = [])
+    {
+        $this->items = $items;
+    }
 
     /**
      * Add an object to the collection
@@ -129,6 +139,25 @@ class Collection
     public function keyExists(string $key) : bool
     {
         return isset($this->items[$key]);
+    }
+
+    /**
+     * Appends all items of another collection
+     *
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function append(Collection $collection) : Collection
+    {
+        foreach ($collection->get() as $key => $item) {
+            if (!$this->keyExists($key)) {
+                $this->addItem($item, $key);
+            }
+            else {
+                $this->addItem($item);
+            }
+        }
+        return $this;
     }
 
     /**

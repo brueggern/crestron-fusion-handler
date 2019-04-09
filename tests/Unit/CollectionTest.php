@@ -77,6 +77,14 @@ class CollectionTest extends BasicTest
     /**
      * @group offline
      */
+    public function testAppendCollection()
+    {
+        $collection1 = $this->createCollection();
+        $collection2 = $this->createCollection();
+
+        $this->assertSame(4, $collection1->append($collection2)->length());
+    }
+
     private function createCollection()
     {
         $dateTime = new DateTime();
