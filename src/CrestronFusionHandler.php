@@ -52,23 +52,12 @@ class CrestronFusionHandler
             $page = 1;
             while ($page > 0) {
                 $response = $this->client->getRequest('rooms', ['page' => $page]);
+                $responseCollection = $this->transformRooms($response);
 
-                $rooms = $response['API_Rooms'];
-                foreach ($rooms as $room) {
-                    $lastModified = str_replace(['/Date(', ')/'], '', $room['LastModified']);
-                    $timestamp = (explode('+', $lastModified)[0] / 1000);
-
-                    $data = [
-                        'id' => $room['RoomID'],
-                        'name' => $room['RoomName'],
-                        'description' => $room['Description'],
-                        'lastModifiedAt' => (new DateTime())->setTimestamp($timestamp),
-                    ];
-                    $roomsCollection->addItem(new Room($data));
-                }
+                $roomsCollection = $roomsCollection->append($responseCollection);
 
                 $page++;
-                if (count($rooms) === 0) {
+                if ($responseCollection->length() === 0) {
                     $page = 0;
                 }
             }
@@ -77,6 +66,24 @@ class CrestronFusionHandler
         catch (CrestronFusionClientException $e) {
             throw new CrestronFusionHandlerException($e->getMessage());
         }
+    }
+
+    private function transformRooms(array $response) : Collection
+    {
+        $collection = new Collection();
+
+        $rooms = $response['API_Rooms'];
+        foreach ($rooms as $room) {
+            $data = [
+                'id' => $room['RoomID'],
+                'name' => $room['RoomName'],
+                'description' => $room['Description'],
+                'lastModifiedAt' => self::convertDate($room['LastModified']),
+            ];
+            $collection->addItem(new Room($data));
+        }
+
+        return $collection;
     }
 
     /**

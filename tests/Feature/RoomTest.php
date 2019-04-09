@@ -9,6 +9,17 @@ use Brueggern\CrestronFusionHandler\CrestronFusionHandler;
 
 class RoomTest extends BasicTest
 {
+    /**
+     * @group offline
+     */
+    public function testTransformRooms()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @group online
+     */
     public function testFetchRooms()
     {
         $handler = new CrestronFusionHandler(getenv('API_URL'));
