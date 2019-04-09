@@ -73,7 +73,7 @@ class CrestronFusionHandler
         $collection = new Collection();
 
         $rooms = $response['API_Rooms'];
-        foreach ($rooms as $room) {
+        foreach ($rooms['API_Room'] as $room) {
             $data = [
                 'id' => $room['RoomID'],
                 'name' => $room['RoomName'],

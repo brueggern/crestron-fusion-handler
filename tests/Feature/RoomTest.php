@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use DateTime;
 use Tests\BasicTest;
+use ReflectionMethod;
+use Brueggern\CrestronFusionHandler\Collection;
 use Brueggern\CrestronFusionHandler\Entities\Room;
 use Brueggern\CrestronFusionHandler\CrestronFusionHandler;
 
@@ -14,7 +16,17 @@ class RoomTest extends BasicTest
      */
     public function testTransformRooms()
     {
-        $this->assertTrue(true);
+        $content = file_get_contents('./tests/resources/roomsResponse.xml');
+        $xml = simplexml_load_string($content);
+        $data = json_decode(json_encode($xml), true);
+
+        $handler = new CrestronFusionHandler('https://foobar');
+        $method = new ReflectionMethod(CrestronFusionHandler::class, 'transformRooms');
+        $method->setAccessible(true);
+        $collection = $method->invoke($handler, $data);
+
+        $this->assertInstanceOf(Collection::class, $collection);
+        $this->assertSame($collection->length(), 25);
     }
 
     /**
