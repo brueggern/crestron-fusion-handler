@@ -115,6 +115,24 @@ class CrestronFusionHandler
         }
     }
 
+    private function transformAppointments(array $response) : Collection
+    {
+        $collection = new Collection();
+
+        $appointments = $response['API_Appointments'];
+        foreach ($appointments['API_Appointment'] as $appointment) {
+            $data = [
+                'id' => $appointment['AltID'],
+                'subject' => $appointment['MeetingSubject'],
+                'start' => self::convertDate($room['start']),
+                'end' => self::convertDate($room['end']),
+            ];
+            $collection->addItem(new Room($data));
+        }
+
+        return $collection;
+    }
+
     /**
      * Convert Crestron Fusion date to PHP DateTime
      *
