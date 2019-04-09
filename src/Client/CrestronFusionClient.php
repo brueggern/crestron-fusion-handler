@@ -62,12 +62,13 @@ class CrestronFusionClient extends Client
             $response = $this->request('GET', $this->baseUrl.'/'.$url, [
                 'query' => $params,
                 'headers' => [
-                    'Content-Type' => 'application/json',
+                    'Content-Type' => 'application/xml',
                 ],
                 'connect_timeout' => 10,
             ]);
 
-            return json_decode($response->getBody(), true);
+            $xml = simplexml_load_string($response->getBody());
+            return json_decode(json_encode($xml), true);
         }
         catch (ConnectException $e) {
             throw new CrestronFusionClientException($e->getMessage());

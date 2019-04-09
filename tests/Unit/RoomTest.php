@@ -10,6 +10,9 @@ use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
 class RoomTest extends BasicTest
 {
+    /**
+     * @group offline
+     */
     public function testCreateRoom()
     {
         $dateTime = new DateTime();
@@ -36,6 +39,9 @@ class RoomTest extends BasicTest
         $room1 = new Room($data);
     }
 
+    /**
+     * @group offline
+     */
     public function testUpdateRoom()
     {
         $dateTime1 = new DateTime();

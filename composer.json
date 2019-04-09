@@ -3,8 +3,11 @@
     "description": "Fetch data from the Crestron Fusion API",
     "type": "library",
     "scripts": {
-        "test" : [
-            "vendor/bin/phpunit"
+        "test:offline" : [
+            "vendor/bin/phpunit --group=offline"
+        ],
+        "test:online" : [
+            "vendor/bin/phpunit --group=online"
         ],
         "lint": "php-linter src tests",
         "lint:fix": "php-linter --fix src tests"

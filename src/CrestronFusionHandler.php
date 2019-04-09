@@ -107,4 +107,15 @@ class CrestronFusionHandler
         catch (CrestronFusionException $e) {
         }
     }
+
+    /**
+     * Convert Crestron Fusion date to PHP DateTime
+     *
+     * @param string $cfDate
+     * @return DateTime
+     */
+    public static function convertDate(string $cfDate) : DateTime
+    {
+        return new DateTime(str_replace(['T', 'Z'], [' ', ''], $cfDate));
+    }
 }

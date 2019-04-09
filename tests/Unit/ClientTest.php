@@ -8,6 +8,9 @@ use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionClientException;
 
 class ClientTest extends BasicTest
 {
+    /**
+     * @group offline
+     */
     public function testConnectionExcpetion()
     {
         $client = new CrestronFusionClient('https://foobar.ch');

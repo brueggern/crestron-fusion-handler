@@ -10,6 +10,9 @@ use Brueggern\CrestronFusionHandler\Exceptions\CollectionException;
 
 class CollectionTest extends BasicTest
 {
+    /**
+     * @group offline
+     */
     public function testAddItem()
     {
         $collection = $this->createCollection();
@@ -19,6 +22,9 @@ class CollectionTest extends BasicTest
         $collection->addItem('Foo', 'foo');
     }
 
+    /**
+     * @group offline
+     */
     public function testGetItem()
     {
         $collection = $this->createCollection();
@@ -31,6 +37,9 @@ class CollectionTest extends BasicTest
         $collection->getItem('bar');
     }
 
+    /**
+     * @group offline
+     */
     public function testDeleteItemString()
     {
         $collection = $this->createCollection();
@@ -41,6 +50,9 @@ class CollectionTest extends BasicTest
         $collection->getItem('room2');
     }
 
+    /**
+     * @group offline
+     */
     public function testDeleteItemInteger()
     {
         $collection = $this->createCollection();
@@ -51,6 +63,9 @@ class CollectionTest extends BasicTest
         $collection->getItem(1);
     }
 
+    /**
+     * @group offline
+     */
     public function testIteration()
     {
         $collection = $this->createCollection();
@@ -59,6 +74,9 @@ class CollectionTest extends BasicTest
         }
     }
 
+    /**
+     * @group offline
+     */
     private function createCollection()
     {
         $dateTime = new DateTime();

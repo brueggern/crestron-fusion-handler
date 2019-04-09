@@ -1,0 +1,110 @@
+<API_Result xmlns="http://schemas.datacontract.org/2004/07/Crestron.Fusion.API.Entities" 
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <API_Appointments>
+        <API_Appointment>
+            <AltID>AAMkAGU2N2JjY2NiLWNlNzQtNGJmOS1hMTg0LWY0YWYzMTI4ZWE1YwBGAAAAAAD9Cg0y0KCmQpER0/ssyIvxBwCtwdvGnyb0TZJsDz7M2cCiAAAA1ZfuAACtwdvGnyb0TZJsDz7M2cCiAAABfaQKAAA=</AltID>
+            <Attendees>"Strohhammer, Ivo (SI IT VC PSW SAP-SBT)" &lt;ivo.strohhammer@siemens.com&gt;,"Rutishauser, Peter (SI BP FIN LOG GSM)" &lt;peter.rutishauser@siemens.com&gt;|| </Attendees>
+            <End>2019-04-09T08:00:00Z</End>
+            <EventOrMeeting>MeetingWithPresets</EventOrMeeting>
+            <GW_MeetingID>040000008200E00074C5B7101A82E0080000000070ABCF3480E8D4010000000000000000100000001C498935DF384347B3F6107DFAB84A1F</GW_MeetingID>
+            <IsPrivate>false</IsPrivate>
+            <LastModified>2019-04-08T00:00:12Z</LastModified>
+            <Location>MR-CH ZUG /TH1B-2.274 (8p)</Location>
+            <MeetingComment/>
+            <MeetingSubject>Strohhammer, Ivo (GS IT BT PRD) </MeetingSubject>
+            <MeetingType>Single</MeetingType>
+            <NotifyAction>None</NotifyAction>
+            <Organizer>"Strohhammer, Ivo (SI IT VC PSW SAP-SBT)" &lt;ivo.strohhammer@siemens.com&gt;</Organizer>
+            <RRule/>
+            <RV_MeetingID>1BE69382-F5E2-4D15-A244-ECDECFF0EB27</RV_MeetingID>
+            <RoomID>d5089306-e95d-4024-8d54-3752c8ebd3d5</RoomID>
+            <Start>2019-04-09T07:15:00Z</Start>
+            <TimeZoneId>W. Europe Standard Time</TimeZoneId>
+        </API_Appointment>
+        <API_Appointment>
+            <AltID>AAMkAGU2N2JjY2NiLWNlNzQtNGJmOS1hMTg0LWY0YWYzMTI4ZWE1YwBGAAAAAAD9Cg0y0KCmQpER0/ssyIvxBwCtwdvGnyb0TZJsDz7M2cCiAAAA1ZfuAACtwdvGnyb0TZJsDz7M2cCiAAABfaPxAAA=</AltID>
+            <Attendees>"Mill, Steffi (SI BP MF ZUG MPDM LOG PU)" &lt;steffi.mill@siemens.com&gt;,"Bucher, Katja (SI BP MF ZUG MPDM FIT)" &lt;katja.bucher@siemens.com&gt;,"Fluck, Tobias (SI BP FIN LOG GVC INB)" &lt;tobias.fluck@siemens.com&gt;|| </Attendees>
+            <End>2019-04-09T09:30:00Z</End>
+            <EventOrMeeting>MeetingWithPresets</EventOrMeeting>
+            <GW_MeetingID>040000008200E00074C5B7101A82E00800000000D0FA908FEBE3D40100000000000000001000000085C7518D0FF1E04B8E3417BF29F051B8</GW_MeetingID>
+            <IsPrivate>false</IsPrivate>
+            <LastModified>2019-04-08T00:00:12Z</LastModified>
+            <Location>MR-CH ZUG /TH1B-2.274 (8p)</Location>
+            <MeetingComment/>
+            <MeetingSubject>Mill, Steffi (BT CPS MF ZUG MPDM PU) </MeetingSubject>
+            <MeetingType>Single</MeetingType>
+            <NotifyAction>None</NotifyAction>
+            <Organizer>"Mill, Steffi (SI BP MF ZUG MPDM LOG PU)" &lt;steffi.mill@siemens.com&gt;</Organizer>
+            <RRule/>
+            <RV_MeetingID>437F1094-F531-4CFA-A421-58F2BC5927CB</RV_MeetingID>
+            <RoomID>d5089306-e95d-4024-8d54-3752c8ebd3d5</RoomID>
+            <Start>2019-04-09T08:30:00Z</Start>
+            <TimeZoneId>W. Europe Standard Time</TimeZoneId>
+        </API_Appointment>
+        <API_Appointment>
+            <AltID>AAMkAGU2N2JjY2NiLWNlNzQtNGJmOS1hMTg0LWY0YWYzMTI4ZWE1YwFRAAgI1rb+JkyAAEYAAAAA/QoNMtCgpkKREdP7LMiL8QcArcHbxp8m9E2SbA8+zNnAogAAANWX7gAArcHbxp8m9E2SbA8+zNnAogAAAXShVwAAEA==</AltID>
+            <Attendees>"Schultheiss, Martin (SI BP FIN LOG GSM CMF)" &lt;martin.schultheiss@siemens.com&gt;,"Boskovic, Brano (SI BP FIN LOG GVC INB)" &lt;brano.boskovic@siemens.com&gt;,"Zimmermann, Wolfgang (SI BP FIN LOG)" &lt;wz.zimmermann@siemens.com&gt;,"Rutishauser, Peter (SI BP FIN LOG GSM)" &lt;peter.rutishauser@siemens.com&gt;,"Joho, David (SI BP FIN LOG GVC INB)" &lt;david.joho@siemens.com&gt;,"Sepcic, Ivana (SI BP FIN LOG GVC INB)" &lt;ivana.sepcic@siemens.com&gt;|| </Attendees>
+            <End>2019-04-09T11:30:00Z</End>
+            <EventOrMeeting>MeetingWithPresets</EventOrMeeting>
+            <GW_MeetingID>040000008200E00074C5B7101A82E00800000000C0C76C15932DD401000000000000000010000000F88782CE308EA74FB1AB11AA66A1E1BD</GW_MeetingID>
+            <IsPrivate>false</IsPrivate>
+            <LastModified>2019-03-04T00:00:13Z</LastModified>
+            <Location>MR-G-CH ZUG TH1B 274 8 Personen</Location>
+            <MeetingComment>&lt;html&gt;&#xD;
+&lt;head&gt;&#xD;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;&#xD;
+&lt;meta name="Generator" content="Microsoft Exchange Server"&gt;&#xD;
+&lt;!-- converted from rtf --&gt;&#xD;
+&lt;style&gt;&lt;!-- .EmailQuote { margin-left: 1pt; padding-left: 4pt; border-left: #800000 2px solid; } --&gt;&lt;/style&gt;&#xD;
+&lt;/head&gt;&#xD;
+&lt;body&gt;&#xD;
+&lt;font face="Calibri" size="2"&gt;&lt;span style="font-size:11pt;"&gt;&#xD;
+&lt;div&gt;Neuer Ort ab September 2018&lt;/div&gt;&#xD;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;&#xD;
+&lt;div&gt;Hallo zusammen&lt;/div&gt;&#xD;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;&#xD;
+&lt;div&gt;Hier die Serie für die zweiwöchentlichen KVP-Besprechungen.&lt;/div&gt;&#xD;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;&#xD;
+&lt;div&gt;Viele Grüsse&lt;/div&gt;&#xD;
+&lt;div&gt;Tobias&lt;/div&gt;&#xD;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;&#xD;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;&#xD;
+&lt;/span&gt;&lt;/font&gt;&#xD;
+&lt;/body&gt;&#xD;
+&lt;/html&gt;&#xD;
+            </MeetingComment>
+            <MeetingSubject>Fluck, Tobias (BT LOG SLM DSC) </MeetingSubject>
+            <MeetingType>RecurringInstance</MeetingType>
+            <NotifyAction>None</NotifyAction>
+            <Organizer>"Fluck, Tobias (BT LOG SLM DSC)" &lt;tobias.fluck@siemens.com&gt;</Organizer>
+            <RRule>FREQ=WEEKLY;INTERVAL=2;BYDAY=TU;WKST=SU;</RRule>
+            <RV_MeetingID>44012D1C-2787-4875-B15B-C15D840C4ED5</RV_MeetingID>
+            <RoomID>7b174813-b065-4acc-94e2-c0725bd5e33c,d5089306-e95d-4024-8d54-3752c8ebd3d5</RoomID>
+            <Start>2019-04-09T10:45:00Z</Start>
+            <TimeZoneId>W. Europe Standard Time</TimeZoneId>
+        </API_Appointment>
+        <API_Appointment>
+            <AltID>AAMkAGU2N2JjY2NiLWNlNzQtNGJmOS1hMTg0LWY0YWYzMTI4ZWE1YwBGAAAAAAD9Cg0y0KCmQpER0/ssyIvxBwCtwdvGnyb0TZJsDz7M2cCiAAAA1ZfuAACtwdvGnyb0TZJsDz7M2cCiAAATMGFSAAA=</AltID>
+            <Attendees>"Spani, Ervin (SI BP MF ZUG MPDM LOG MH)" &lt;ervin.spani@siemens.com&gt;,"Gutzmann, Andy (SI BP MF ZUG MPDM LOG MH)" &lt;andy.gutzmann@siemens.com&gt;,"Kura, Burim (SI BP MF ZUG MPDM LOG MH)" &lt;burim.kura@siemens.com&gt;,"Dotlo, Niko (SI BP MF ZUG MPDM LOG MH)" &lt;nico.dotlo@siemens.com&gt;,"Shabani, Avdyl (SI BP MF ZUG MPDM LOG MH)" &lt;avdyl.shabani@siemens.com&gt;,"Krizevac, Nermina (SI BP MF ZUG MPDM LOG MH)" &lt;nermina.krizevac@siemens.com&gt;,"MR-CH ZUG /TH1B-2.274 (8p)" &lt;zug_th1b_274.ch@internal.siemens.com&gt;|| </Attendees>
+            <End>2019-04-09T13:00:00Z</End>
+            <EventOrMeeting>MeetingWithPresets</EventOrMeeting>
+            <GW_MeetingID>040000008200E00074C5B7101A82E0080000000040949C99C4EBD401000000000000000010000000F99E38A150402444BBCA00A096224362</GW_MeetingID>
+            <IsPrivate>false</IsPrivate>
+            <LastModified>2019-04-08T00:00:12Z</LastModified>
+            <Location>ZUG /TH1B-2. 274 (8p) </Location>
+            <MeetingComment/>
+            <MeetingSubject>Spani, Ervin (SI BP MF ZUG MPDM LOG MH) </MeetingSubject>
+            <MeetingType>Single</MeetingType>
+            <NotifyAction>None</NotifyAction>
+            <Organizer>"Spani, Ervin (SI BP MF ZUG MPDM LOG MH)" &lt;ervin.spani@siemens.com&gt;</Organizer>
+            <RRule/>
+            <RV_MeetingID>06C09EBC-8D66-4A45-B4F5-B3490954CF9F</RV_MeetingID>
+            <RoomID>d5089306-e95d-4024-8d54-3752c8ebd3d5</RoomID>
+            <Start>2019-04-09T11:30:00Z</Start>
+            <TimeZoneId>W. Europe Standard Time</TimeZoneId>
+        </API_Appointment>
+    </API_Appointments>
+    <PageNumber>1</PageNumber>
+    <Status>Success</Status>
+    <TotalRecords>4</TotalRecords>
+</API_Result>
