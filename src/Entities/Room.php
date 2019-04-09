@@ -60,9 +60,7 @@ class Room
      */
     public function __get(string $name)
     {
-        if ($name === 'lastModifiedAt') {
-            return $this->lastModifiedAt;
-        }
+        return $this->{$name};
     }
 
     /**

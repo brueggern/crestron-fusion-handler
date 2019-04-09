@@ -27,6 +27,11 @@ class RoomTest extends BasicTest
 
         $this->assertInstanceOf(Collection::class, $collection);
         $this->assertSame($collection->length(), 25);
+
+        foreach ($collection->get() as $room) {
+            $this->assertInstanceOf(Room::class, $room);
+            $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
+        }
     }
 
     /**
@@ -34,13 +39,13 @@ class RoomTest extends BasicTest
      */
     public function testFetchRooms()
     {
-        $handler = new CrestronFusionHandler(getenv('API_URL'));
+        /* $handler = new CrestronFusionHandler(getenv('API_URL'));
         $handler->setAuth(getenv('AUTH_TOKEN'), getenv('AUTH_USER'));
         $roomsCollection = $handler->getRooms();
 
         foreach ($roomsCollection->get() as $room) {
             $this->assertInstanceOf(Room::class, $room);
             $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
-        }
+        } */
     }
 }
