@@ -85,6 +85,11 @@ class CollectionTest extends BasicTest
         $this->assertSame(4, $collection1->append($collection2)->length());
     }
 
+    /**
+     * Create a collection object
+     *
+     * @return void
+     */
     private function createCollection()
     {
         $dateTime = new DateTime();
