@@ -53,9 +53,7 @@ class CrestronFusionHandler
             $page = 1;
             while ($page > 0) {
                 $response = $this->client->getRequest('rooms', ['page' => $page]);
-
                 $responseCollection = $this->transformRooms($response);
-
                 $roomsCollection = $roomsCollection->append($responseCollection);
 
                 $page++;
@@ -96,26 +94,35 @@ class CrestronFusionHandler
      * @param DateTime $dateTime
      * @return Collection
      */
-    public function getAppointments(DateTime $dateTime) : Collection
+    public function getAppointments(DateTime $dateTime, Collection $rooms) : Collection
     {
         try {
-        }
-        catch (CrestronFusionException $e) {
-        }
-    }
+            $appointmentsCollection = new Collection();
 
-    /**
-     * Get all appointments of a specific room and day
-     *
-     * @param Room $room
-     * @param DateTime $dateTime
-     * @return Collection
-     */
-    public function getAppointmentsByRoom(Room $room, DateTime $dateTime) : Collection
-    {
-        try {
+            foreach ($rooms->get() as $room) {
+                $page = 1;
+                while ($page > 0) {
+                    $params = [
+                        'room' => $room->id,
+                        'start' => $dateTime->format('Y-m-d'),
+                        'duration' => 24,
+                        'page' => $page,
+                    ];
+                    $response = $this->client->getRequest('appointments', $params);
+                    $responseCollection = $this->transformAppointments($response);
+                    $appointmentsCollection = $appointmentsCollection->append($responseCollection);
+
+                    $page++;
+                    if ($responseCollection->length() === 0) {
+                        $page = 0;
+                    }
+                }
+            }
+
+            return $appointmentsCollection;
         }
-        catch (CrestronFusionException $e) {
+        catch (CrestronFusionClientException $e) {
+            throw new CrestronFusionHandlerException($e->getMessage());
         }
     }
 
@@ -124,18 +131,21 @@ class CrestronFusionHandler
         $collection = new Collection();
 
         $appointments = $response['API_Appointments'];
-        foreach ($appointments['API_Appointment'] as $appointment) {
-            $data = [
-                'id' => $appointment['AltID'],
-                'subject' => $appointment['MeetingSubject'],
-                'comment' => $appointment['MeetingComment'],
-                'start' => self::transformDate($appointment['Start']),
-                'end' => self::transformDate($appointment['End']),
-                'attendees' => self::transformEmployees($appointment['Attendees']),
-                'organizer' => self::transformEmployees($appointment['Organizer']),
-                'room' => self::transformRoom($appointment['RoomID']),
-            ];
-            $collection->addItem(new Appointment($data));
+        if (isset($appointments['API_Appointment'])) {
+            $appointmentsArray = count($appointments) > 1 ? $appointments['API_Appointment'] : [$appointments['API_Appointment']];
+            foreach ($appointmentsArray as $appointment) {
+                $data = [
+                    'id' => $appointment['RV_MeetingID'],
+                    'subject' => $appointment['MeetingSubject'],
+                    'comment' => $appointment['MeetingComment'],
+                    'start' => self::transformDate($appointment['Start']),
+                    'end' => self::transformDate($appointment['End']),
+                    'attendees' => self::transformEmployees($appointment['Attendees']),
+                    'organizer' => self::transformEmployees($appointment['Organizer']),
+                    'room' => self::transformRoom($appointment['RoomID']),
+                ];
+                $collection->addItem(new Appointment($data));
+            }
         }
 
         return $collection;

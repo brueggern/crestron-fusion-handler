@@ -38,4 +38,31 @@ class AppointmentTest extends BasicTest
             $this->assertTrue(is_array($appointment->organizer));
         }
     }
+
+    /**
+     * @group online
+     */
+    public function testFetchAppointments()
+    {
+        $handler = new CrestronFusionHandler(getenv('API_URL'));
+        $handler->setAuth(getenv('AUTH_TOKEN'), getenv('AUTH_USER'));
+
+        $roomsCollection = $handler->getRooms();
+
+        if ($roomsCollection->length() > 0) {
+            $room = $roomsCollection->getItem(0);
+
+            $collection = new Collection();
+            $collection->addItem(new Room(['id' => $room->id]));
+            $appointmentsCollection = $handler->getAppointments(new DateTime(), $collection);
+
+            echo($appointmentsCollection->length().'--');
+
+            foreach ($appointmentsCollection->get() as $appointment) {
+                $this->assertInstanceOf(Appointment::class, $appointment);
+                $this->assertInstanceOf(DateTime::class, $room->start);
+                $this->assertInstanceOf(DateTime::class, $room->end);
+            }
+        }
+    }
 }
