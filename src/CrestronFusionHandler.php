@@ -78,7 +78,7 @@ class CrestronFusionHandler
                 'id' => $room['RoomID'],
                 'name' => $room['RoomName'],
                 'description' => $room['Description'],
-                'lastModifiedAt' => self::convertDate($room['LastModified']),
+                'lastModifiedAt' => self::transformDate($room['LastModified']),
             ];
             $collection->addItem(new Room($data));
         }
@@ -124,8 +124,12 @@ class CrestronFusionHandler
             $data = [
                 'id' => $appointment['AltID'],
                 'subject' => $appointment['MeetingSubject'],
-                'start' => self::convertDate($room['start']),
-                'end' => self::convertDate($room['end']),
+                'comment' => $appointment['MeetingComment'],
+                'start' => self::transformDate($room['start']),
+                'end' => self::transformDate($room['end']),
+                'attendees' => self::transformEmployees($appointment['MeetingSubject']),
+                'organizer' => self::transformEmployees($appointment['MeetingSubject']),
+                'room' => self::transformRoom($appointment['MeetingSubject']),
             ];
             $collection->addItem(new Room($data));
         }
@@ -134,13 +138,43 @@ class CrestronFusionHandler
     }
 
     /**
-     * Convert Crestron Fusion date to PHP DateTime
+     * Transform Crestron Fusion date to DateTime
      *
      * @param string $cfDate
      * @return DateTime
      */
-    public static function convertDate(string $cfDate) : DateTime
+    public static function transformDate(string $cfDate) : DateTime
     {
         return new DateTime(str_replace(['T', 'Z'], [' ', ''], $cfDate));
+    }
+
+    /**
+     * Transform Crestron Fusion employee string to array
+     *
+     * @param string $cfEmployees
+     * @return array
+     */
+    public static function transformEmployees(string $cfEmployees) : array
+    {
+        preg_match_all('/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i', html_entity_decode($cfEmployees), $matches);
+
+        $employees = [];
+        if (count($matches) > 0) {
+            foreach ($matches[0] as $email) {
+                $employees[] = $email;
+            }
+        }
+        return $employees;
+    }
+
+    /**
+     * Transform Crestron Fusion room id to Room entity
+     *
+     * @param string $cfRoomId
+     * @return Room
+     */
+    public static function transformRoom(string $cfRoomId) : Room
+    {
+        return new Room(['id' => $cfRoomId]);
     }
 }

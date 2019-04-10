@@ -14,7 +14,7 @@ class AppointmentTest extends BasicTest
     /**
      * @group offline
      */
-    public function testTransformAppointments()
+    public function _testTransformAppointments()
     {
         $content = file_get_contents('./tests/resources/appointmentsResponse.xml');
         $xml = simplexml_load_string($content);
