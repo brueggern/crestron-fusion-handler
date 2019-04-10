@@ -53,6 +53,7 @@ class CrestronFusionHandler
             $page = 1;
             while ($page > 0) {
                 $response = $this->client->getRequest('rooms', ['page' => $page]);
+
                 $responseCollection = $this->transformRooms($response);
 
                 $roomsCollection = $roomsCollection->append($responseCollection);
@@ -74,14 +75,16 @@ class CrestronFusionHandler
         $collection = new Collection();
 
         $rooms = $response['API_Rooms'];
-        foreach ($rooms['API_Room'] as $room) {
-            $data = [
-                'id' => $room['RoomID'],
-                'name' => $room['RoomName'],
-                'description' => $room['Description'],
-                'lastModifiedAt' => self::transformDate($room['LastModified']),
-            ];
-            $collection->addItem(new Room($data));
+        if (isset($rooms['API_Room'])) {
+            foreach ($rooms['API_Room'] as $room) {
+                $data = [
+                    'id' => $room['RoomID'],
+                    'name' => $room['RoomName'],
+                    'description' => $room['Description'],
+                    'lastModifiedAt' => self::transformDate($room['LastModified']),
+                ];
+                $collection->addItem(new Room($data));
+            }
         }
 
         return $collection;
