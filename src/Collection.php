@@ -147,7 +147,7 @@ class Collection
      * @param Collection $collection
      * @return Collection
      */
-    public function append(Collection $collection) : Collection
+    public function append(self $collection) : self
     {
         foreach ($collection->get() as $key => $item) {
             if (!$this->keyExists($key)) {

@@ -18,7 +18,7 @@ class HandlerTest extends BasicTest
 
         $date = CrestronFusionHandler::transformDate($dt);
         $this->assertInstanceOf(DateTime::class, $date);
-        $this->assertEquals($date, new DateTime($dt));
+        $this->assertSame($date, new DateTime($dt));
     }
 
     /**
@@ -44,6 +44,6 @@ class HandlerTest extends BasicTest
 
         $room = CrestronFusionHandler::transformRoom($roomId);
         $this->assertInstanceOf(Room::class, $room);
-        $this->assertEquals($room->id, $roomId);
+        $this->assertSame($room->id, $roomId);
     }
 }

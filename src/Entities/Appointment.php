@@ -3,7 +3,6 @@
 namespace Brueggern\CrestronFusionHandler\Entities;
 
 use DateTime;
-use Brueggern\CrestronFusionHandler\Entities\Room;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
 class Appointment

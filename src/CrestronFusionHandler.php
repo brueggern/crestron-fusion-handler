@@ -6,7 +6,6 @@ use DateTime;
 use Brueggern\CrestronFusionHandler\Entities\Room;
 use Brueggern\CrestronFusionHandler\Entities\Appointment;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
-use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionHandlerException;
 
 class CrestronFusionHandler
@@ -68,27 +67,6 @@ class CrestronFusionHandler
         }
     }
 
-    private function transformRooms(array $response) : Collection
-    {
-        $collection = new Collection();
-
-        $rooms = $response['API_Rooms'];
-        if (isset($rooms['API_Room'])) {
-            $aRooms = array_key_exists(0, $rooms['API_Room']) ? $rooms['API_Room'] : [$rooms['API_Room']];
-            foreach ($aRooms as $room) {
-                $data = [
-                    'id' => $room['RoomID'],
-                    'name' => $room['RoomName'],
-                    'description' => $room['Description'],
-                    'lastModifiedAt' => self::transformDate($room['LastModified']),
-                ];
-                $collection->addItem(new Room($data));
-            }
-        }
-
-        return $collection;
-    }
-
     /**
      * Get all appointments of a specific day
      *
@@ -116,31 +94,6 @@ class CrestronFusionHandler
         catch (CrestronFusionClientException $e) {
             throw new CrestronFusionHandlerException($e->getMessage());
         }
-    }
-
-    private function transformAppointments(array $response) : Collection
-    {
-        $collection = new Collection();
-
-        $appointments = $response['API_Appointments'];
-        if (!empty($appointments['API_Appointment'])) {
-            $aAppointment = array_key_exists(0, $appointments['API_Appointment']) ? $appointments['API_Appointment'] : [$appointments['API_Appointment']];
-            foreach ($aAppointment as $appointment) {
-                $data = [
-                    'id' => $appointment['RV_MeetingID'],
-                    'subject' => $appointment['MeetingSubject'],
-                    'comment' => $appointment['MeetingComment'],
-                    'start' => self::transformDate($appointment['Start']),
-                    'end' => self::transformDate($appointment['End']),
-                    'attendees' => self::transformEmployees($appointment['Attendees']),
-                    'organizer' => self::transformEmployees($appointment['Organizer']),
-                    'room' => self::transformRoom($appointment['RoomID']),
-                ];
-                $collection->addItem(new Appointment($data));
-            }
-        }
-
-        return $collection;
     }
 
     /**
@@ -182,5 +135,63 @@ class CrestronFusionHandler
     public static function transformRoom(string $cfRoomId) : Room
     {
         return new Room(['id' => $cfRoomId]);
+    }
+
+    /**
+     * Transform response to a collection of Rooms objects
+     *
+     * @param array $response
+     * @return Collection
+     */
+    private function transformRooms(array $response) : Collection
+    {
+        $collection = new Collection();
+
+        $rooms = $response['API_Rooms'];
+        if (isset($rooms['API_Room'])) {
+            $aRooms = array_key_exists(0, $rooms['API_Room']) ? $rooms['API_Room'] : [$rooms['API_Room']];
+            foreach ($aRooms as $room) {
+                $data = [
+                    'id' => $room['RoomID'],
+                    'name' => $room['RoomName'],
+                    'description' => $room['Description'],
+                    'lastModifiedAt' => self::transformDate($room['LastModified']),
+                ];
+                $collection->addItem(new Room($data));
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Transform response to a collection of Appointment objects
+     *
+     * @param array $response
+     * @return Collection
+     */
+    private function transformAppointments(array $response) : Collection
+    {
+        $collection = new Collection();
+
+        $appointments = $response['API_Appointments'];
+        if (!empty($appointments['API_Appointment'])) {
+            $aAppointment = array_key_exists(0, $appointments['API_Appointment']) ? $appointments['API_Appointment'] : [$appointments['API_Appointment']];
+            foreach ($aAppointment as $appointment) {
+                $data = [
+                    'id' => $appointment['RV_MeetingID'],
+                    'subject' => $appointment['MeetingSubject'],
+                    'comment' => $appointment['MeetingComment'],
+                    'start' => self::transformDate($appointment['Start']),
+                    'end' => self::transformDate($appointment['End']),
+                    'attendees' => self::transformEmployees($appointment['Attendees']),
+                    'organizer' => self::transformEmployees($appointment['Organizer']),
+                    'room' => self::transformRoom($appointment['RoomID']),
+                ];
+                $collection->addItem(new Appointment($data));
+            }
+        }
+
+        return $collection;
     }
 }

@@ -28,8 +28,8 @@ class AppointmentTest extends BasicTest
         $collection = $method->invoke($handler, $data);
 
         $this->assertInstanceOf(Collection::class, $collection);
-        $this->assertSame($collection->length(), 4); 
-        
+        $this->assertSame($collection->length(), 4);
+
         foreach ($collection->get() as $appointment) {
             $this->assertInstanceOf(Appointment::class, $appointment);
             $this->assertInstanceOf(DateTime::class, $appointment->start);
@@ -48,7 +48,7 @@ class AppointmentTest extends BasicTest
         $collection = $method->invoke($handler, $data);
 
         $this->assertInstanceOf(Collection::class, $collection);
-        $this->assertSame($collection->length(), 1); 
+        $this->assertSame($collection->length(), 1);
     }
 
     /**
@@ -67,8 +67,6 @@ class AppointmentTest extends BasicTest
             $collection = new Collection();
             $collection->addItem(new Room(['id' => $room->id]));
             $appointmentsCollection = $handler->getAppointments(new DateTime(), $collection);
-
-            echo($appointmentsCollection->length().'--');
 
             foreach ($appointmentsCollection->get() as $appointment) {
                 $this->assertInstanceOf(Appointment::class, $appointment);
