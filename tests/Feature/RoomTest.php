@@ -16,11 +16,12 @@ class RoomTest extends BasicTest
      */
     public function testTransformRooms()
     {
-        $content = file_get_contents('./tests/resources/roomsResponse.xml');
+        $handler = new CrestronFusionHandler('https://foobar');
+
+        $content = file_get_contents('./tests/resources/roomsResponse1.xml');
         $xml = simplexml_load_string($content);
         $data = json_decode(json_encode($xml), true);
 
-        $handler = new CrestronFusionHandler('https://foobar');
         $method = new ReflectionMethod(CrestronFusionHandler::class, 'transformRooms');
         $method->setAccessible(true);
         $collection = $method->invoke($handler, $data);
@@ -32,6 +33,17 @@ class RoomTest extends BasicTest
             $this->assertInstanceOf(Room::class, $room);
             $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
         }
+
+        $content = file_get_contents('./tests/resources/roomsResponse2.xml');
+        $xml = simplexml_load_string($content);
+        $data = json_decode(json_encode($xml), true);
+
+        $method = new ReflectionMethod(CrestronFusionHandler::class, 'transformRooms');
+        $method->setAccessible(true);
+        $collection = $method->invoke($handler, $data);
+
+        $this->assertInstanceOf(Collection::class, $collection);
+        $this->assertSame($collection->length(), 1);
     }
 
     /**

@@ -1,0 +1,15 @@
+<API_Result xmlns="http://schemas.datacontract.org/2004/07/Crestron.Fusion.API.Entities" 
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <API_Rooms>
+        <API_Room>
+            <Description>Room_TH1B_274</Description>
+            <LastModified>2019-03-21T11:08:00</LastModified>
+            <RoomID>d5089306-e95d-4024-8d54-3752c8ebd3d5</RoomID>
+            <RoomName>274</RoomName>
+        </API_Room>
+    </API_Rooms>
+    <Message>Page 1 of 1</Message>
+    <PageNumber>1</PageNumber>
+    <Status>Success</Status>
+    <TotalRecords>40</TotalRecords>
+</API_Result>

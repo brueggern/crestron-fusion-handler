@@ -74,7 +74,8 @@ class CrestronFusionHandler
 
         $rooms = $response['API_Rooms'];
         if (isset($rooms['API_Room'])) {
-            foreach ($rooms['API_Room'] as $room) {
+            $aRooms = array_key_exists(0, $rooms['API_Room']) ? $rooms['API_Room'] : [$rooms['API_Room']];
+            foreach ($aRooms as $room) {
                 $data = [
                     'id' => $room['RoomID'],
                     'name' => $room['RoomName'],
@@ -100,23 +101,14 @@ class CrestronFusionHandler
             $appointmentsCollection = new Collection();
 
             foreach ($rooms->get() as $room) {
-                $page = 1;
-                while ($page > 0) {
-                    $params = [
-                        'room' => $room->id,
-                        'start' => $dateTime->format('Y-m-d'),
-                        'duration' => 24,
-                        'page' => $page,
-                    ];
-                    $response = $this->client->getRequest('appointments', $params);
-                    $responseCollection = $this->transformAppointments($response);
-                    $appointmentsCollection = $appointmentsCollection->append($responseCollection);
-
-                    $page++;
-                    if ($responseCollection->length() === 0) {
-                        $page = 0;
-                    }
-                }
+                $params = [
+                    'room' => $room->id,
+                    'start' => $dateTime->format('Y-m-d'),
+                    'duration' => 24,
+                ];
+                $response = $this->client->getRequest('appointments', $params);
+                $responseCollection = $this->transformAppointments($response);
+                $appointmentsCollection = $appointmentsCollection->append($responseCollection);
             }
 
             return $appointmentsCollection;
@@ -131,9 +123,9 @@ class CrestronFusionHandler
         $collection = new Collection();
 
         $appointments = $response['API_Appointments'];
-        if (isset($appointments['API_Appointment'])) {
-            $appointmentsArray = count($appointments) > 1 ? $appointments['API_Appointment'] : [$appointments['API_Appointment']];
-            foreach ($appointmentsArray as $appointment) {
+        if (!empty($appointments['API_Appointment'])) {
+            $aAppointment = array_key_exists(0, $appointments['API_Appointment']) ? $appointments['API_Appointment'] : [$appointments['API_Appointment']];
+            foreach ($aAppointment as $appointment) {
                 $data = [
                     'id' => $appointment['RV_MeetingID'],
                     'subject' => $appointment['MeetingSubject'],
