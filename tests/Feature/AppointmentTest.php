@@ -6,6 +6,7 @@ use DateTime;
 use Tests\BasicTest;
 use ReflectionMethod;
 use Brueggern\CrestronFusionHandler\Collection;
+use Brueggern\CrestronFusionHandler\Entities\Room;
 use Brueggern\CrestronFusionHandler\Entities\Appointment;
 use Brueggern\CrestronFusionHandler\CrestronFusionHandler;
 
@@ -14,7 +15,7 @@ class AppointmentTest extends BasicTest
     /**
      * @group offline
      */
-    public function _testTransformAppointments()
+    public function testTransformAppointments()
     {
         $content = file_get_contents('./tests/resources/appointmentsResponse.xml');
         $xml = simplexml_load_string($content);

@@ -4,6 +4,7 @@ namespace Brueggern\CrestronFusionHandler;
 
 use DateTime;
 use Brueggern\CrestronFusionHandler\Entities\Room;
+use Brueggern\CrestronFusionHandler\Entities\Appointment;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionHandlerException;
@@ -125,13 +126,13 @@ class CrestronFusionHandler
                 'id' => $appointment['AltID'],
                 'subject' => $appointment['MeetingSubject'],
                 'comment' => $appointment['MeetingComment'],
-                'start' => self::transformDate($room['start']),
-                'end' => self::transformDate($room['end']),
-                'attendees' => self::transformEmployees($appointment['MeetingSubject']),
-                'organizer' => self::transformEmployees($appointment['MeetingSubject']),
-                'room' => self::transformRoom($appointment['MeetingSubject']),
+                'start' => self::transformDate($appointment['Start']),
+                'end' => self::transformDate($appointment['End']),
+                'attendees' => self::transformEmployees($appointment['Attendees']),
+                'organizer' => self::transformEmployees($appointment['Organizer']),
+                'room' => self::transformRoom($appointment['RoomID']),
             ];
-            $collection->addItem(new Room($data));
+            $collection->addItem(new Appointment($data));
         }
 
         return $collection;
