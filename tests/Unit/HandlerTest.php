@@ -14,11 +14,11 @@ class HandlerTest extends BasicTest
      */
     public function testTransformDate()
     {
-        $dt = '2019-03-21T11:09:56';
+        $dtString = '2019-03-21T11:09:56';
 
-        $date = CrestronFusionHandler::transformDate($dt);
+        $date = CrestronFusionHandler::transformDate($dtString);
         $this->assertInstanceOf(DateTime::class, $date);
-        $this->assertEquals($date, new DateTime($dt));
+        $this->assertSame((new DateTime($dtString))->format('Y-m-d H:i:s'), $date->format('Y-m-d H:i:s'));
     }
 
     /**

@@ -15,6 +15,6 @@ class ClientTest extends BasicTest
     {
         $client = new CrestronFusionClient('https://foobar.ch');
         $this->expectException(CrestronFusionClientException::class);
-        $client->getRequest('', []);
+        $client->sendGETRequest('', []);
     }
 }
