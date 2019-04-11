@@ -49,7 +49,7 @@ class CrestronFusionClient extends Client
      * @param array $params
      * @return array
      */
-    public function getRequest(string $url, array $params) : array
+    public function sendGETRequest(string $url, array $params) : array
     {
         if ($this->authToken && $this->authUser) {
             $auth = [

@@ -51,7 +51,7 @@ class CrestronFusionHandler
 
             $page = 1;
             while ($page > 0) {
-                $response = $this->client->getRequest('rooms', ['page' => $page]);
+                $response = $this->client->sendGETRequest('rooms', ['page' => $page]);
                 $responseCollection = $this->transformRooms($response);
                 $roomsCollection = $roomsCollection->append($responseCollection);
 
@@ -84,7 +84,7 @@ class CrestronFusionHandler
                     'start' => $dateTime->format('Y-m-d'),
                     'duration' => 24,
                 ];
-                $response = $this->client->getRequest('appointments', $params);
+                $response = $this->client->sendGETRequest('appointments', $params);
                 $responseCollection = $this->transformAppointments($response);
                 $appointmentsCollection = $appointmentsCollection->append($responseCollection);
             }
