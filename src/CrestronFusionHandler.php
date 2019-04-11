@@ -67,6 +67,21 @@ class CrestronFusionHandler
         }
     }
 
+    public function updateRoom(Room $room, array $payload) : Room
+    {
+        try {
+            $response = $this->client->sendPUTRequest('rooms/'.$room->id, $payload);
+            $responseCollection = $this->transformRooms($response);
+            if ($responseCollection->length() === 0) {
+                throw new CrestronFusionHandlerException('No room returned in response!');
+            }
+            return $responseCollection->get()[0];
+        }
+        catch (CrestronFusionClientException $e) {
+            throw new CrestronFusionHandlerException($e->getMessage());
+        }
+    }
+
     /**
      * Get all appointments of a specific day
      *

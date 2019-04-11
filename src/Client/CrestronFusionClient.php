@@ -74,4 +74,30 @@ class CrestronFusionClient extends Client
             throw new CrestronFusionClientException($e->getMessage());
         }
     }
+
+    public function sendPUTRequest(string $url, array $payload) : array
+    {
+        if ($this->authToken && $this->authUser) {
+            $auth = [
+                'auth' => $this->authToken.' '.$this->authUser,
+            ];
+            $payload = array_merge($auth, $payload);
+        }
+
+        try {
+            $response = $this->request('PUT', $this->baseUrl.'/'.$url, [
+                'query' => $payload,
+                'headers' => [
+                    'Content-Type' => 'application/xml',
+                ],
+                'connect_timeout' => 10,
+            ]);
+
+            $xml = simplexml_load_string($response->getBody());
+            return json_decode(json_encode($xml), true);
+        }
+        catch (ConnectException $e) {
+            throw new CrestronFusionClientException($e->getMessage());
+        }
+    }
 }

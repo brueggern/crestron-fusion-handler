@@ -29,6 +29,13 @@ class Room
     public $description = null;
 
     /**
+     * Groupware password
+     *
+     * @var string
+     */
+    public $groupwarePassword = null;
+
+    /**
      * Last modified time
      *
      * @var DateTime
@@ -49,6 +56,7 @@ class Room
         $this->id = $data['id'] ?? null;
         $this->name = $data['name'] ?? null;
         $this->description = $data['description'] ?? null;
+        $this->groupwarePassword = $data['groupwarePassword'] ?? null;
         $this->lastModifiedAt = $data['lastModifiedAt'] ?? null;
     }
 

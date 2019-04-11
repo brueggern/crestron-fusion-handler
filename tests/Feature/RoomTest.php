@@ -49,7 +49,7 @@ class RoomTest extends BasicTest
     /**
      * @group online
      */
-    public function testFetchRooms()
+    public function testGetRooms()
     {
         $handler = new CrestronFusionHandler(getenv('API_URL'));
         $handler->setAuth(getenv('AUTH_TOKEN'), getenv('AUTH_USER'));
@@ -58,6 +58,22 @@ class RoomTest extends BasicTest
         foreach ($roomsCollection->get() as $room) {
             $this->assertInstanceOf(Room::class, $room);
             $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
+        }
+    }
+
+    /**
+     * @group online
+     */
+    public function testUpdateRoom()
+    {
+        $handler = new CrestronFusionHandler(getenv('API_URL'));
+        $handler->setAuth(getenv('AUTH_TOKEN'), getenv('AUTH_USER'));
+        $roomsCollection = $handler->getRooms();
+
+        if ($roomsCollection->length() > 0) {
+            $roomOriginal = $roomsCollection->get()[0];
+            $room = $handler->updateRoom($roomOriginal, ['GroupwarePassword' => 'test1234']);
+            $this->assertNotSame($roomOriginal->groupPwareassword, $room->groupwarePassword);
         }
     }
 }
