@@ -68,11 +68,16 @@ class AppointmentTest extends BasicTest
             $collection->addItem(new Room(['id' => $room->id]));
             $appointmentsCollection = $handler->getAppointments(new DateTime(), $collection);
 
+            $this->assertInstanceOf(Collection::class, $appointmentsCollection);
+
             foreach ($appointmentsCollection->get() as $appointment) {
                 $this->assertInstanceOf(Appointment::class, $appointment);
                 $this->assertInstanceOf(DateTime::class, $room->start);
                 $this->assertInstanceOf(DateTime::class, $room->end);
             }
+        }
+        else {
+            $this->assertSame($roomsCollection->length(), 0);
         }
     }
 }

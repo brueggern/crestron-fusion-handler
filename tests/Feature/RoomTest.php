@@ -64,7 +64,7 @@ class RoomTest extends BasicTest
     /**
      * @group online
      */
-    public function testUpdateRoom()
+    public function _testUpdateRoom()
     {
         $handler = new CrestronFusionHandler(getenv('API_URL'));
         $handler->setAuth(getenv('AUTH_TOKEN'), getenv('AUTH_USER'));
