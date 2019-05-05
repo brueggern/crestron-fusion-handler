@@ -86,9 +86,11 @@ class CrestronFusionHandler
      * Get all appointments of a specific day
      *
      * @param DateTime $dateTime
+     * @param CFCollection $rooms
+     * @param int $duration
      * @return CFCollection
      */
-    public function getAppointments(DateTime $dateTime, CFCollection $rooms) : CFCollection
+    public function getAppointments(DateTime $dateTime, CFCollection $rooms, int $duration = 48) : CFCollection
     {
         try {
             $appointmentsCollection = new CFCollection();
@@ -97,7 +99,7 @@ class CrestronFusionHandler
                 $params = [
                     'room' => $room->id,
                     'start' => $dateTime->format('Y-m-d'),
-                    'duration' => 24,
+                    'duration' => $duration,
                 ];
                 $response = $this->client->sendGETRequest('appointments', $params);
                 $responseCollection = $this->transformAppointments($response);
