@@ -18,15 +18,15 @@ $roomsCollection = $handler->getRooms();
 ## Fetch Appointments
 Fetch appointments of specific rooms.
 ```
-$rooms = new Collection();
-$rooms->addItem(new Room(['id' => '41746b03-1803-4d65-84eb-06815688c780']));
+$rooms = new CFCollection();
+$rooms->addItem(new CFRoom(['id' => '41746b03-1803-4d65-84eb-06815688c780']));
 $appointmentsCollection = $handler->getAppointments(new DateTime(), $rooms);
 ```
 
 ## Collections
-Instead of arrays, a collection object is always returned. For more information, see `src/Collection.php`
+Instead of arrays, a collection object is always returned. For more information, see `src/CFCollection.php`
 ```
-$collection = new Collection();
+$collection = new CFCollection();
 $collection->addItem('Room One', 'room1');
 $collection->addItem('Room Two, 'room2');
 

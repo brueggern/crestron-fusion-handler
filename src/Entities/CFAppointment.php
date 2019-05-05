@@ -5,7 +5,7 @@ namespace Brueggern\CrestronFusionHandler\Entities;
 use DateTime;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
-class Appointment
+class CFAppointment
 {
     /**
      * uuid
@@ -59,7 +59,7 @@ class Appointment
     /**
      * room
      *
-     * @var Room
+     * @var CFRoom
      */
     private $room = null;
 
@@ -82,7 +82,7 @@ class Appointment
         if (isset($data['organizer']) && !is_array($data['organizer'])) {
             throw new CrestronFusionException('Invalid type for organizer');
         }
-        if (isset($data['room']) && !$data['room'] instanceof Room) {
+        if (isset($data['room']) && !$data['room'] instanceof CFRoom) {
             throw new CrestronFusionException('Invalid type for room');
         }
 
@@ -100,7 +100,7 @@ class Appointment
      * Get a property value
      *
      * @param string $name
-     * @return void
+     * @return mix
      */
     public function __get(string $name)
     {
@@ -132,7 +132,7 @@ class Appointment
         }
 
         if ($name === 'room') {
-            if ($value instanceof Room) {
+            if ($value instanceof CFRoom) {
                 $this->{$name} = $value;
                 return;
             }

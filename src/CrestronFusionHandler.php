@@ -3,8 +3,8 @@
 namespace Brueggern\CrestronFusionHandler;
 
 use DateTime;
-use Brueggern\CrestronFusionHandler\Entities\Room;
-use Brueggern\CrestronFusionHandler\Entities\Appointment;
+use Brueggern\CrestronFusionHandler\Entities\CFRoom;
+use Brueggern\CrestronFusionHandler\Entities\CFAppointment;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionHandlerException;
 
@@ -42,12 +42,12 @@ class CrestronFusionHandler
     /**
      * Get all rooms
      *
-     * @return Collection
+     * @return CFCollection
      */
-    public function getRooms() : Collection
+    public function getRooms() : CFCollection
     {
         try {
-            $roomsCollection = new Collection();
+            $roomsCollection = new CFCollection();
 
             $page = 1;
             while ($page > 0) {
@@ -67,7 +67,7 @@ class CrestronFusionHandler
         }
     }
 
-    public function updateRoom(Room $room, array $payload) : Room
+    public function updateRoom(CFRoom $room, array $payload) : CFRoom
     {
         try {
             $response = $this->client->sendPUTRequest('rooms/'.$room->id, $payload);
@@ -86,12 +86,12 @@ class CrestronFusionHandler
      * Get all appointments of a specific day
      *
      * @param DateTime $dateTime
-     * @return Collection
+     * @return CFCollection
      */
-    public function getAppointments(DateTime $dateTime, Collection $rooms) : Collection
+    public function getAppointments(DateTime $dateTime, CFCollection $rooms) : CFCollection
     {
         try {
-            $appointmentsCollection = new Collection();
+            $appointmentsCollection = new CFCollection();
 
             foreach ($rooms->get() as $room) {
                 $params = [
@@ -145,22 +145,22 @@ class CrestronFusionHandler
      * Transform Crestron Fusion room id to Room entity
      *
      * @param string $cfRoomId
-     * @return Room
+     * @return CFRoom
      */
-    public static function transformRoom(string $cfRoomId) : Room
+    public static function transformRoom(string $cfRoomId) : CFRoom
     {
-        return new Room(['id' => $cfRoomId]);
+        return new CFRoom(['id' => $cfRoomId]);
     }
 
     /**
      * Transform response to a collection of Rooms objects
      *
      * @param array $response
-     * @return Collection
+     * @return CFCollection
      */
-    private function transformRooms(array $response) : Collection
+    private function transformRooms(array $response) : CFCollection
     {
-        $collection = new Collection();
+        $collection = new CFCollection();
 
         $rooms = $response['API_Rooms'];
         if (isset($rooms['API_Room'])) {
@@ -172,7 +172,7 @@ class CrestronFusionHandler
                     'description' => $room['Description'],
                     'lastModifiedAt' => self::transformDate($room['LastModified']),
                 ];
-                $collection->addItem(new Room($data));
+                $collection->addItem(new CFRoom($data));
             }
         }
 
@@ -183,11 +183,11 @@ class CrestronFusionHandler
      * Transform response to a collection of Appointment objects
      *
      * @param array $response
-     * @return Collection
+     * @return CFCollection
      */
-    private function transformAppointments(array $response) : Collection
+    private function transformAppointments(array $response) : CFCollection
     {
-        $collection = new Collection();
+        $collection = new CFCollection();
 
         $appointments = $response['API_Appointments'];
         if (!empty($appointments['API_Appointment'])) {
@@ -203,7 +203,7 @@ class CrestronFusionHandler
                     'organizer' => self::transformEmployees($appointment['Organizer']),
                     'room' => self::transformRoom($appointment['RoomID']),
                 ];
-                $collection->addItem(new Appointment($data));
+                $collection->addItem(new CFAppointment($data));
             }
         }
 

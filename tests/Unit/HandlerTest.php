@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use DateTime;
 use Tests\BasicTest;
-use Brueggern\CrestronFusionHandler\Entities\Room;
+use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\CrestronFusionHandler;
 
 class HandlerTest extends BasicTest
@@ -43,7 +43,7 @@ class HandlerTest extends BasicTest
         $roomId = 'd5089306-e95d-4024-8d54-3752c8ebd3d5';
 
         $room = CrestronFusionHandler::transformRoom($roomId);
-        $this->assertInstanceOf(Room::class, $room);
+        $this->assertInstanceOf(CFRoom::class, $room);
         $this->assertSame($room->id, $roomId);
     }
 }

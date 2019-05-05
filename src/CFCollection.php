@@ -4,7 +4,7 @@ namespace Brueggern\CrestronFusionHandler;
 
 use Brueggern\CrestronFusionHandler\Exceptions\CollectionException;
 
-class Collection
+class CFCollection
 {
     /**
      * Array of objects

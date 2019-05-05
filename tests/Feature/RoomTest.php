@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use DateTime;
 use Tests\BasicTest;
 use ReflectionMethod;
-use Brueggern\CrestronFusionHandler\Collection;
-use Brueggern\CrestronFusionHandler\Entities\Room;
+use Brueggern\CrestronFusionHandler\CFCollection;
+use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\CrestronFusionHandler;
 
 class RoomTest extends BasicTest
@@ -26,11 +26,11 @@ class RoomTest extends BasicTest
         $method->setAccessible(true);
         $collection = $method->invoke($handler, $data);
 
-        $this->assertInstanceOf(Collection::class, $collection);
+        $this->assertInstanceOf(CFCollection::class, $collection);
         $this->assertSame($collection->length(), 25);
 
         foreach ($collection->get() as $room) {
-            $this->assertInstanceOf(Room::class, $room);
+            $this->assertInstanceOf(CFRoom::class, $room);
             $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
         }
 
@@ -42,7 +42,7 @@ class RoomTest extends BasicTest
         $method->setAccessible(true);
         $collection = $method->invoke($handler, $data);
 
-        $this->assertInstanceOf(Collection::class, $collection);
+        $this->assertInstanceOf(CFCollection::class, $collection);
         $this->assertSame($collection->length(), 1);
     }
 
@@ -56,7 +56,7 @@ class RoomTest extends BasicTest
         $roomsCollection = $handler->getRooms();
 
         foreach ($roomsCollection->get() as $room) {
-            $this->assertInstanceOf(Room::class, $room);
+            $this->assertInstanceOf(CFRoom::class, $room);
             $this->assertInstanceOf(DateTime::class, $room->lastModifiedAt);
         }
     }

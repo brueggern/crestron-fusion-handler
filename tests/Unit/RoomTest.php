@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use DateTime;
 use DateInterval;
 use Tests\BasicTest;
-use Brueggern\CrestronFusionHandler\Entities\Room;
+use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
 class RoomTest extends BasicTest
@@ -23,7 +23,7 @@ class RoomTest extends BasicTest
             'description' => 'this is a string.',
             'lastModifiedAt' => $dateTime,
         ];
-        $room1 = new Room($data);
+        $room1 = new CFRoom($data);
         $this->assertSame($room1->id, $data['id']);
         $this->assertSame($room1->name, $data['name']);
         $this->assertSame($room1->description, $data['description']);
@@ -36,7 +36,7 @@ class RoomTest extends BasicTest
             'lastModifiedAt' => $dateTime->format('Y-m-d H:i:s'),
         ];
         $this->expectException(CrestronFusionException::class);
-        $room1 = new Room($data);
+        $room1 = new CFRoom($data);
     }
 
     /**
@@ -52,7 +52,7 @@ class RoomTest extends BasicTest
             'description' => 'this is a string.',
             'lastModifiedAt' => $dateTime1,
         ];
-        $room1 = new Room($data);
+        $room1 = new CFRoom($data);
 
         $dateTime2 = new DateTime();
         $dateTime2->sub(new DateInterval('P1D'));

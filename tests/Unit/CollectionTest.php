@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use DateTime;
 use Tests\BasicTest;
-use Brueggern\CrestronFusionHandler\Collection;
-use Brueggern\CrestronFusionHandler\Entities\Room;
+use Brueggern\CrestronFusionHandler\CFCollection;
+use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\Exceptions\CollectionException;
 
 class CollectionTest extends BasicTest
@@ -100,7 +100,7 @@ class CollectionTest extends BasicTest
             'description' => 'this is a string.',
             'lastModifiedAt' => $dateTime,
         ];
-        $room1 = new Room($data);
+        $room1 = new CFRoom($data);
 
         $data = [
             'id' => '2',
@@ -108,9 +108,9 @@ class CollectionTest extends BasicTest
             'description' => 'this is a string.',
             'lastModifiedAt' => $dateTime,
         ];
-        $room2 = new Room($data);
+        $room2 = new CFRoom($data);
 
-        $collection = new Collection();
+        $collection = new CFCollection();
         $collection->addItem($room1, 'room1');
         $collection->addItem($room2, 'room2');
 

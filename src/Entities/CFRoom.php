@@ -5,7 +5,7 @@ namespace Brueggern\CrestronFusionHandler\Entities;
 use DateTime;
 use Brueggern\CrestronFusionHandler\Exceptions\CrestronFusionException;
 
-class Room
+class CFRoom
 {
     /**
      * uuid
@@ -64,7 +64,7 @@ class Room
      * Get a property value
      *
      * @param string $name
-     * @return void
+     * @return mixed
      */
     public function __get(string $name)
     {
