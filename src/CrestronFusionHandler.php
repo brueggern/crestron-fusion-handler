@@ -4,7 +4,6 @@ namespace Brueggern\CrestronFusionHandler;
 
 use DateTime;
 use DateTimeZone;
-use Brueggern\CrestronFusionHandler\WindowsZones;
 use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\Entities\CFAppointment;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
