@@ -72,8 +72,8 @@ class AppointmentTest extends BasicTest
 
             foreach ($appointmentsCollection->get() as $appointment) {
                 $this->assertInstanceOf(CFAppointment::class, $appointment);
-                $this->assertInstanceOf(DateTime::class, $room->start);
-                $this->assertInstanceOf(DateTime::class, $room->end);
+                $this->assertInstanceOf(DateTime::class, $appointment->start);
+                $this->assertInstanceOf(DateTime::class, $appointment->end);
             }
         }
         else {
