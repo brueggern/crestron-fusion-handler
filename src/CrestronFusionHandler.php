@@ -3,6 +3,8 @@
 namespace Brueggern\CrestronFusionHandler;
 
 use DateTime;
+use DateTimeZone;
+use Brueggern\CrestronFusionHandler\WindowsZones;
 use Brueggern\CrestronFusionHandler\Entities\CFRoom;
 use Brueggern\CrestronFusionHandler\Entities\CFAppointment;
 use Brueggern\CrestronFusionHandler\Client\CrestronFusionClient;
@@ -117,11 +119,15 @@ class CrestronFusionHandler
      * Transform Crestron Fusion date to DateTime
      *
      * @param string $cfDate
+     * @param string $timezoneId
      * @return DateTime
      */
-    public static function transformDate(string $cfDate) : DateTime
+    public static function transformDate(string $cfDate, string $timezoneId = 'Central European Time') : DateTime
     {
-        return new DateTime(str_replace(['T', 'Z'], [' ', ''], $cfDate));
+        $dateString = str_replace(['T', 'Z'], [' ', ''], $cfDate);
+        $date = new DateTime($dateString, new DateTimeZone(WindowsZones::getUTC($timezoneId)));
+        $date->setTimezone((new DateTime())->getTimezone());
+        return $date;
     }
 
     /**
@@ -199,8 +205,8 @@ class CrestronFusionHandler
                     'id' => $appointment['RV_MeetingID'],
                     'subject' => $appointment['MeetingSubject'],
                     'comment' => $appointment['MeetingComment'],
-                    'start' => self::transformDate($appointment['Start']),
-                    'end' => self::transformDate($appointment['End']),
+                    'start' => self::transformDate($appointment['Start'], $appointment['TimeZoneId']),
+                    'end' => self::transformDate($appointment['End'], $appointment['TimeZoneId']),
                     'attendees' => self::transformEmployees($appointment['Attendees']),
                     'organizer' => self::transformEmployees($appointment['Organizer']),
                     'room' => self::transformRoom($appointment['RoomID']),
