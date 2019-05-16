@@ -94,7 +94,7 @@
             <Location>ZUG /TH1B-2. 274 (8p) </Location>
             <MeetingComment/>
             <MeetingSubject>Spani, Ervin (SI BP MF ZUG MPDM LOG MH) </MeetingSubject>
-            <MeetingType>Single</MeetingType>
+            <MeetingType>RecurringInstance</MeetingType>
             <NotifyAction>None</NotifyAction>
             <Organizer>"Spani, Ervin (SI BP MF ZUG MPDM LOG MH)" &lt;ervin.spani@siemens.com&gt;</Organizer>
             <RRule/>

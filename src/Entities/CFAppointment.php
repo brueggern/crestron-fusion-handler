@@ -64,6 +64,13 @@ class CFAppointment
     private $room = null;
 
     /**
+     * meeting type
+     *
+     * @var string
+     */
+    private $type = null;
+
+    /**
      * Create a new apponintment entity
      *
      * @param array $data
@@ -94,6 +101,7 @@ class CFAppointment
         $this->organizer = $data['organizer'] ?? null;
         $this->room = $data['room'] ?? null;
         $this->comment = $data['comment'] ?? null;
+        $this->type = $data['type'] ?? null;
     }
 
     /**

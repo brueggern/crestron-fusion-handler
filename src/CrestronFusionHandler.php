@@ -209,6 +209,7 @@ class CrestronFusionHandler
                     'attendees' => self::transformEmployees($appointment['Attendees']),
                     'organizer' => self::transformEmployees($appointment['Organizer']),
                     'room' => self::transformRoom($appointment['RoomID']),
+                    'type' => $appointment['MeetingType'],
                 ];
                 $collection->addItem(new CFAppointment($data));
             }
